@@ -75,7 +75,16 @@ class uploadViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                     imageReference.downloadURL { url, error in
                         if error == nil{
                             let imageUrl = url?.absoluteString
-                            print(imageUrl)
+                            
+                            
+                            let firestoreDatabase = Firestore.firestore()
+                            var firestoreReference : DocumentReference? = nil
+                            let firestorePost = ["imageUrl" : imageUrl!, "postedBy" : Auth.auth().currentUser!.email, "postComment" : self.commentTextfield.text!,"date" : "date", "likes" : 0 ] as [String : Any]
+                            firestoreReference = firestoreDatabase.collection("Posts").addDocument(data: firestorePost, completion: { (error) in
+                                if error != nil{
+                                    self.makeAlert(titleInput: "error!", messageInput: error?.localizedDescription ?? "error")
+                                }
+                            })
                         }
                         
                     }
