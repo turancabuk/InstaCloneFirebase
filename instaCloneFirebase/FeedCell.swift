@@ -27,6 +27,7 @@ class FeedCell: UITableViewCell{
         super.setSelected(selected, animated: animated)
 
         
+        
     }
 
     @IBAction func likeButtonClicked(_ sender: Any) {
