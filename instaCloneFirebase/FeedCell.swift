@@ -29,6 +29,7 @@ class FeedCell: UITableViewCell{
     }
 
     @IBAction func likeButtonClicked(_ sender: Any) {
+        print("like button clicked")
     }
     
 }
