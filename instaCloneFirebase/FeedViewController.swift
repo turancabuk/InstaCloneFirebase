@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import SDWebImage
 
 
 
@@ -32,6 +33,8 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     func getDataFromFirebase() {
         
+        
+        
         let firestoreDatabase = Firestore.firestore()
         firestoreDatabase.collection("Posts").addSnapshotListener { snapShot, error in
             
@@ -39,6 +42,14 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 print(error?.localizedDescription)
             }else{
                 if snapShot?.isEmpty != true {
+                    
+                    
+                    self.userImageArray.removeAll(keepingCapacity: false)
+                    self.commentArray.removeAll(keepingCapacity: false)
+                    self.likeArray.removeAll(keepingCapacity: false)
+                    self.userEmailArray.removeAll(keepingCapacity: false)
+
+                    
                     for document in snapShot!.documents {
                         let documentID = document.documentID
                         
@@ -51,8 +62,8 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         if let postComment = document.get("postComment") as? String{
                             self.commentArray.append(postComment)
                         }
-                        if let imageURL = document.get("imageURL") as? String{
-                            self.userImageArray.append(imageURL)
+                        if let imageUrl = document.get("imageUrl") as? String{
+                            self.userImageArray.append(imageUrl)
                         }
                         self.tableView.reloadData()
                     }
@@ -74,7 +85,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.userEmailLabel.text = userEmailArray[indexPath.row]
         cell.likeLabel.text = String(likeArray[indexPath.row])
         cell.commentLabel.text = commentArray[indexPath.row]
-        cell.userImageView.image = UIImage(named: "select")
+        cell.userImageView.sd_setImage(with: URL(string: self.userImageArray[indexPath.row]))
         return cell
     }
     

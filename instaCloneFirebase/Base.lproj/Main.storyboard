@@ -130,9 +130,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <segue destination="ftR-XB-2im" kind="relationship" relationship="viewControllers" id="TvC-rH-SYY"/>
                         <segue destination="tGd-HN-jkb" kind="relationship" relationship="viewControllers" id="uFn-Pz-2Xf"/>
                         <segue destination="DVn-WF-4z8" kind="relationship" relationship="viewControllers" id="coE-2g-eOb"/>
-                        <segue destination="ftR-XB-2im" kind="relationship" relationship="viewControllers" id="TvC-rH-SYY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kb9-QP-j8i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
